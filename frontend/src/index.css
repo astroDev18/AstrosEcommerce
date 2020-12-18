@@ -52,6 +52,12 @@ footer {
   text-align: center;
 }
 
+/* Image */
+img.small {
+  max-width: 5rem;
+  width: 100%;
+}
+
 /* Common */
 h1 {
   font-size: 1.8rem;
@@ -60,9 +66,8 @@ h1 {
 }
 h2 {
   font-size: 2.5rem;
-  /*padding: 1rem 0;*/
   text-decoration: none;
-  color: black;
+  color: #43484D;
 }
 
 a {
@@ -117,6 +122,14 @@ a.brand {
   color: #6cd4ff;
   font-size: 3rem;
   font-weight: bold;
+}
+.badge {
+  background-color: firebrick;
+  color: white;
+  border-radius: 50%;
+  padding: 0.2rem 0.7rem;
+  font-size: 1.4rem;
+  margin-left: 0.2rem;
 }
 .row {
   display: flex;
@@ -208,6 +221,8 @@ a.brand {
     justify-content: center;
   }
 }
+
+
 
 
 

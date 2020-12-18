@@ -1,0 +1,80 @@
+.checkout_outerContainer {
+    border: dashed 2px #6cd4ff;
+    padding: 20px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.20);
+    border-radius: 6px;
+    min-height: 90%;
+
+}
+
+
+.checkout_columnOne {
+    background-color: whitesmoke;
+    height: 50%;
+    margin-top: 3%;
+    padding: 20px 20px 60px;
+    border-radius: 8px;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+}
+.checkout_columnTwo {
+    min-width: 60%;
+}
+.checkout_price {
+    color: #43484D;
+}
+
+
+.checkout_button {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 0.1rem #a4a4a4 solid;
+    font-family: Tajawal, SansSerif, sans-serif;
+    background-color: gold;
+    cursor: pointer;
+    width: 100%;
+}
+
+.checkout_innerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #E1E8EE;
+}
+
+button {
+    font-size: 2rem;
+}
+
+.checkout_Header {
+    border-bottom: 1px solid #6cd4ff;
+
+    text-align: center;
+    font-size: 4rem;
+    color: #6cd4ff;
+}
+
+.checkout_Button {
+    border-radius: 50px;
+    border: none;
+    background-color: lightblue;
+}
+
+.checkout_Button:hover, .checkout_Button:focus {
+    color: darkred;
+    cursor: pointer;
+    outline: none
+}
+
+@media (max-width: 1300px) {
+    .checkout_outerContainer {
+        flex-direction: column;
+    }
+}
