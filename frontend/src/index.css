@@ -83,6 +83,30 @@ ul {
 li {
   margin-top: 1rem;
 }
+input,
+select,
+textarea,
+.button {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 0.1rem #a4a4a4 solid;
+  font-family: Tajawal, SansSerif, sans-serif;
+}
+
+.button {
+  background-color: gold;
+  cursor: pointer;
+}
+input:hover,
+select:hover,
+textarea:hover
+{
+  border: 0.1rem black solid;
+}
+.button:hover {
+  background-color: #FAFAD2;
+  transition: 0.1s;
+}
 
 /* Header */
 header a {
