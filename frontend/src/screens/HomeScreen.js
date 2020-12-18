@@ -1,34 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect} from 'react';
 import Product from '../components/Product';
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
+import {useDispatch, useSelector} from 'react-redux';
+import {listProducts} from "../actions/productActions";
 
 export default function HomeScreen() {
-  // React hook that manages state, default state is empty, when changing products use setProducts function
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  // Hook allows us to dispatch any redux action inside our react components
+  const dispatch = useDispatch();
+    // Gets product list from redux store after updating
+  const productList = useSelector((state) => state.productList);
+  const { loading, error, products } = productList;
+
   // Hook used when component renders on page
   useEffect(() => {
-    // First param is function, second is array that accept list of dependencies
-    // Function will only run once
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        // data from backend transferred to front end
-        // Retrieves data from axios, array from backend transferred to front end
-        const { data } = await axios.get('/api/products');
-        setLoading(false);
-        // Products hook holds data from backend
-        setProducts(data);
-      } catch (err) {
-        setError(err.message);
-        setLoading(false);
-      }
-    };
-    // Call fetch data after defining it
-    fetchData();
+    // Dispatch redux action that updates redux store
+    dispatch(listProducts())
   }, []);
   return (
       <div>
