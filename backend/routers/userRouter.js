@@ -1,19 +1,79 @@
 import express from 'express';
-import expressAsyncHandler from 'express-async-handler';
-import data from '../data.js';
 import User from '../models/userModel.js';
-
+import auth from '../middleware/auth.js'
 const userRouter = express.Router();
 
-userRouter.get(
-    '/seed',
-    expressAsyncHandler(async (req, res) => {
-        await User.remove({})
-        const createdUsers = await User.insertMany(data.users);
-      res.send({ createdUsers });
-    })
-);
+
+userRouter.post('/create', async (req, res) => {
+    const user = new User(req.body)
+
+    try {
+        await user.save()
+
+        const token = await user.generateAuthToken();
+        res.status(201).send({ user, token })
+    } catch (e) {
+        console.log("Test", e)
+        res.status(400).send(e)
+    }
+})
 
 
+userRouter.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.send(users)
+    } catch (e) {
+        res.status(500).send();
+    }
+})
+
+userRouter.post('/users/login', async (req, res) => {
+    try {
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        const token = await user.generateAuthToken()
+        res.send({ user, token });
+    } catch (e) {
+        res.status(400).send(e);
+    }
+})
+
+userRouter.get('/users/me', async (req, res) => {
+    try {
+        res.send(req.user);
+    } catch (e) {
+        res.status(400).send(e);
+    }
+})
+
+userRouter.post('/users/logout', auth, async (req, res) => {
+    try {
+
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+
+userRouter.get('/users/me', auth, async (req, res) => {
+    res.send(req.user)
+})
+
+
+userRouter.get('/users/:id', async (req, res) => {
+    const _id = req.params.id
+
+    try {
+        const user = await User.findById(_id)
+
+        if (!user) {
+            return res.status(404).send()
+        }
+
+        res.send(user)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
 
 export default userRouter;
