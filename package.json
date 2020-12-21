@@ -21,7 +21,11 @@
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-async-handler": "^1.1.4",
-    "mongoose": "^5.11.8"
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.8",
+    "require": "^2.4.20",
+    "validator": "^13.5.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"
