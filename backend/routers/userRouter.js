@@ -4,11 +4,11 @@ import auth from '../middleware/auth.js'
 const userRouter = express.Router();
 
 
-userRouter.post('/create', async (req, res) => {
+userRouter.post('/register', async (req, res) => {
     const user = new User(req.body)
 
     try {
-        await user.save()
+        const createdUser = await user.save();
 
         const token = await user.generateAuthToken();
         res.status(201).send({ user, token })
@@ -80,6 +80,33 @@ userRouter.get('/users/:id', async (req, res) => {
         }
 
         res.send(user)
+    } catch (e) {
+        res.status(500).send()
+    }
+})
+
+userRouter.patch('/users/me', auth, async (req, res) => {
+    const updates = Object.keys(req.body)
+    const allowedUpdates = ['name', 'email', 'password']
+    const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid updates!' })
+    }
+
+    try {
+        updates.forEach((update) => req.user[update] = req.body[update])
+        await req.user.save()
+        res.send(req.user)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+userRouter.delete('/users/me', auth, async (req, res) => {
+    try {
+        await req.user.remove()
+        res.send(req.user)
     } catch (e) {
         res.status(500).send()
     }
