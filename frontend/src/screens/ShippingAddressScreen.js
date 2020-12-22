@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 export default function ShippingAddressScreen(props) {
     const userSignin = useSelector(state => state.userSignin);
-    const {userInfo } = userSignin;
+    const {userInfo} = userSignin;
     const cart =  useSelector(state => state.cart);
     const { shippingAddress } = cart;
 
@@ -31,7 +31,7 @@ export default function ShippingAddressScreen(props) {
             <CheckoutSteps step1 step2></CheckoutSteps>
             <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <h1>Shipping Address</h1>
+                    <h1 className='shipping_header'>Shipping Address</h1>
                 </div>
                 <div>
                     <label htmlFor="fullName">Full Name</label>
