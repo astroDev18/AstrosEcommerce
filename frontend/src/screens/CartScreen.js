@@ -4,6 +4,8 @@ import {addToCart, removeFromCart} from "../actions/cartActions";
 import MessageBox from "../components/MessageBox";
 import {Link} from "react-router-dom";
 import './CartScreen.css';
+import CurrencyFormat from 'react-currency-format'
+
 
 
 export default function CartScreen(props) {
@@ -86,8 +88,8 @@ export default function CartScreen(props) {
                     <ul>
                         <li>
                             <h2>
-                                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items) : $
-                                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}
+                                Subtotal ({cartItems.reduce((a, c) => a + c.qty, 0)} items):<br />
+                                 <CurrencyFormat  value={cartItems.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2)} displayType={'text'} thousandSeparator={true} prefix={'$'}/>
                             </h2>
                         </li>
                         <li>
