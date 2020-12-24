@@ -19,7 +19,7 @@ userRouter.post('/register', async (req, res) => {
 })
 
 
-userRouter.get('/users', async (req, res) => {
+userRouter.get('/', async (req, res) => {
     try {
         const users = await User.find({});
         res.send(users)
@@ -28,7 +28,7 @@ userRouter.get('/users', async (req, res) => {
     }
 })
 
-userRouter.post('/users/login', async (req, res) => {
+userRouter.post('/login', async (req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
         const token = await user.generateAuthToken()
@@ -38,7 +38,7 @@ userRouter.post('/users/login', async (req, res) => {
     }
 })
 
-userRouter.get('/users/me', auth, async (req, res) => {
+userRouter.get('/me', auth, async (req, res) => {
     try {
         res.send(req.user);
     } catch (e) {
@@ -46,7 +46,7 @@ userRouter.get('/users/me', auth, async (req, res) => {
     }
 })
 
-userRouter.post('/users/logout', auth, async (req, res) => {
+userRouter.post('/logout', auth, async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
             return token.token !== req.token
@@ -59,7 +59,7 @@ userRouter.post('/users/logout', auth, async (req, res) => {
     }
 })
 
-userRouter.post('/users/logoutAll', auth, async (req, res) => {
+userRouter.post('/logoutAll', auth, async (req, res) => {
     try {
         req.user.tokens = []
         await req.user.save()
@@ -69,7 +69,7 @@ userRouter.post('/users/logoutAll', auth, async (req, res) => {
     }
 })
 
-userRouter.get('/users/:id', async (req, res) => {
+userRouter.get('/:id', async (req, res) => {
     const _id = req.params.id
 
     try {
@@ -85,7 +85,7 @@ userRouter.get('/users/:id', async (req, res) => {
     }
 })
 
-userRouter.patch('/users/me', auth, async (req, res) => {
+userRouter.patch('/me', auth, async (req, res) => {
     const updates = Object.keys(req.body)
     const allowedUpdates = ['name', 'email', 'password']
     const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
@@ -103,7 +103,7 @@ userRouter.patch('/users/me', auth, async (req, res) => {
     }
 })
 
-userRouter.delete('/users/me', auth, async (req, res) => {
+userRouter.delete('/me', auth, async (req, res) => {
     try {
         await req.user.remove()
         res.send(req.user)

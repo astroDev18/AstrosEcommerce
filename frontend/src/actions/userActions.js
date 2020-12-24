@@ -12,9 +12,9 @@ import Axios from 'axios';
 export const register = (name, email, password) => async (dispatch) => {
     dispatch({type: USER_REGISTER_REQUEST, payload: {email, password}})
     try {
-        const { data } = await Axios.post('/register', {name, email, password});
-        dispatch ({ type: USER_REGISTER_SUCCESS, payload: data});
-        dispatch ({ type: USER_SIGNIN_SUCCESS, payload: data});
+        const {data} = await Axios.post('/api/users/register', {name, email, password});
+        dispatch({type: USER_REGISTER_SUCCESS, payload: data});
+        dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (e) {
         dispatch({
@@ -27,12 +27,11 @@ export const register = (name, email, password) => async (dispatch) => {
 }
 
 
-
 export const signin = (email, password) => async (dispatch) => {
     dispatch({type: USER_SIGNIN_REQUEST, payload: {email: email, password: password}})
     try {
-        const { data } = await Axios.post('users/login', {email, password});
-        dispatch ({ type: USER_SIGNIN_SUCCESS, payload: data});
+        const {data} = await Axios.post('/api/users/login', {email, password});
+        dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
         localStorage.setItem('userInfo', JSON.stringify(data));
     } catch (e) {
         dispatch({
@@ -48,5 +47,5 @@ export const signout = () => (dispatch) => {
     localStorage.removeItem('userInfo');
     localStorage.removeItem('cartItems');
     localStorage.removeItem('shippingAddress');
-    dispatch({ type: USER_SIGNOUT })
+    dispatch({type: USER_SIGNOUT})
 }

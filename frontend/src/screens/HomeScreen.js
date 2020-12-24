@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 
 import Product from '../components/Product';
@@ -9,7 +10,7 @@ import { listProducts } from '../actions/productActions';
 export default function HomeScreen() {
   // Hook allows us to dispatch any redux action inside our react components
   const dispatch = useDispatch();
-    // Gets product list from redux store after updating
+  // Gets product list from redux store after updating
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
@@ -23,15 +24,15 @@ export default function HomeScreen() {
         {loading ? (
             <LoadingBox></LoadingBox>
         ) : error ? (
-          <MessageBox variant="danger">{error}</MessageBox>
+            <MessageBox variant="danger">{error}</MessageBox>
         ) : (<div className='main'>
-          <h1 className='main_title'>Products</h1>
-          <div className="cards">
-            {products.map((product) => (
-                <Product key={product._id} product={product}></Product>
-            ))}
-          </div>
-        </div>
+              <h1 className='main_title'>Products</h1>
+              <div className="cards">
+                {products.map((product) => (
+                    <Product key={product._id} product={product}></Product>
+                ))}
+              </div>
+            </div>
         )}
       </div>
   );
