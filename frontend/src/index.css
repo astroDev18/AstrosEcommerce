@@ -143,7 +143,6 @@ a.brand {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  border: 2px solid #51e5ff;
   gap: 20px;
   padding: 20px;
 }
@@ -267,4 +266,21 @@ a.brand {
 
 .shipping_header {
   font-size: 3rem;
+}
+
+.order_container {
+  margin: 25px;
+}
+
+.checkout_orderItems {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout_item {
+ padding: 20px;
 }
